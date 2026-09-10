@@ -1106,6 +1106,10 @@ describe('Manage Source Page', () => {
       manageSourcePage.fillAccessToken('test-token');
       manageSourcePage.fillOrganization('Google');
       manageSourcePage.findEnableSourceCheckbox().should('not.be.checked');
+      manageSourcePage.findPreviewButton().should('be.disabled');
+      manageSourcePage.clickValidate();
+      cy.wait('@previewSource');
+      manageSourcePage.findPreviewButton().should('not.be.disabled');
       manageSourcePage.findPreviewButton().click();
       cy.wait('@previewSource');
 
