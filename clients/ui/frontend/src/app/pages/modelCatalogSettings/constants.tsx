@@ -77,6 +77,9 @@ export const PREVIEW_ALERTS = {
   GATED_ACCESS_REQUIRED_TITLE: 'Some models require access',
   GATED_ACCESS_REQUIRED_BODY:
     'A few included models are gated on Hugging Face and require permission to use. Request access on Hugging Face to use these models.',
+  SOURCE_DISABLED_TITLE: 'Source disabled',
+  SOURCE_DISABLED_BODY:
+    'Models from this source will not appear in the model catalog until the source is enabled.',
 } as const;
 
 export const ERROR_MESSAGES = {
@@ -100,12 +103,6 @@ export const SUCCESS_MESSAGES = {
 
 export const TOOLTIP_MESSAGES = {
   PREVIEW_REQUIRES_VALIDATION: 'Validate the access token to preview models.',
-} as const;
-
-export const WARNING_MESSAGES = {
-  SOURCE_DISABLED: 'Source disabled.',
-  SOURCE_DISABLED_BODY:
-    'Models from this source will not appear in the model catalog until the source is enabled.',
 } as const;
 
 export const TABLE_COLUMN_LABELS = {

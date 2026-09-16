@@ -440,12 +440,8 @@ describe('PreviewPanel', () => {
     render(<PreviewPanel preview={preview} isSourceEnabled={false} />);
 
     expect(screen.getByTestId('source-disabled-warning')).toBeInTheDocument();
-    expect(screen.getByText('Source disabled.')).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        'Models from this source will not appear in the model catalog until the source is enabled.',
-      ),
-    ).toBeInTheDocument();
+    expect(screen.getByText(PREVIEW_ALERTS.SOURCE_DISABLED_TITLE)).toBeInTheDocument();
+    expect(screen.getByText(PREVIEW_ALERTS.SOURCE_DISABLED_BODY)).toBeInTheDocument();
   });
 
   it('does not show source disabled warning when source is enabled', () => {

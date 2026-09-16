@@ -25,7 +25,6 @@ import {
   ERROR_MESSAGES,
   EMPTY_STATE_TEXT,
   PREVIEW_ALERTS,
-  WARNING_MESSAGES,
 } from '~/app/pages/modelCatalogSettings/constants';
 import {
   isPreviewModelGatedAccessDenied,
@@ -262,11 +261,11 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ preview, isSourceEnabled })
         <Alert
           variant="warning"
           isInline
-          title={WARNING_MESSAGES.SOURCE_DISABLED}
+          title={PREVIEW_ALERTS.SOURCE_DISABLED_TITLE}
           className="pf-v6-u-mb-md"
           data-testid="source-disabled-warning"
         >
-          {WARNING_MESSAGES.SOURCE_DISABLED_BODY}
+          {PREVIEW_ALERTS.SOURCE_DISABLED_BODY}
         </Alert>
       )}
       {renderContent()}
