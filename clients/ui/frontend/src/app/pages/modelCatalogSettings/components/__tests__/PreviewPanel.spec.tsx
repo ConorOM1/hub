@@ -466,4 +466,21 @@ describe('PreviewPanel', () => {
 
     expect(screen.queryByTestId('source-disabled-warning')).not.toBeInTheDocument();
   });
+
+  it('does not show source disabled warning when preview has an error', () => {
+    const preview = createMockPreview(
+      {},
+      {
+        error: new Error('Failed to fetch preview'),
+        tabStates: {
+          [CatalogSettingsPreviewTab.INCLUDED]: { items: [], hasMore: false },
+          [CatalogSettingsPreviewTab.EXCLUDED]: { items: [], hasMore: false },
+        },
+      },
+    );
+    render(<PreviewPanel preview={preview} isSourceEnabled={false} />);
+
+    expect(screen.queryByTestId('source-disabled-warning')).not.toBeInTheDocument();
+    expect(screen.getByText('Preview failed')).toBeInTheDocument();
+  });
 });

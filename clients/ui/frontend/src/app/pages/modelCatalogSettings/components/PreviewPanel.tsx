@@ -54,7 +54,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ preview, isSourceEnabled })
   const { isLoadingInitial, isLoadingMore, activeTab, summary, tabStates, error } = previewState;
   const { items, hasMore } = tabStates[activeTab];
   const previewError = error;
-  const showSourceDisabledWarning = !isSourceEnabled && !!summary;
+  const showSourceDisabledWarning = !isSourceEnabled && !!summary && !previewError;
 
   const hasGatedAccessDeniedModels = React.useMemo(
     () =>
