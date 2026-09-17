@@ -47,7 +47,7 @@ export const DESCRIPTION_TEXT = {
 export const HELPER_TEXT = {
   YAML: 'Upload or paste a YAML string.',
   ORGANIZATION_SLUG:
-    'Use the Hugging Face URL slug (for example, meta-llama). Names are case-sensitive and might differ from the displayed organization name.',
+    'Case-sensitive. Type only the Hugging Face URL slug. For example, meta-llama.',
   ACCESS_TOKEN_HIDDEN: 'The access token is hidden. To replace or remove it, clear the token.',
 } as const;
 
@@ -102,7 +102,7 @@ export const SUCCESS_MESSAGES = {
 } as const;
 
 export const TOOLTIP_MESSAGES = {
-  PREVIEW_REQUIRES_VALIDATION: 'Validate the access token to preview models.',
+  PREVIEW_REQUIRES_VALIDATION: 'To preview models, validate the access token.',
 } as const;
 
 export const TABLE_COLUMN_LABELS = {
