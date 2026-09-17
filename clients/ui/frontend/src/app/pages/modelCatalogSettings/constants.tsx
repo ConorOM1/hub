@@ -77,6 +77,10 @@ export const PREVIEW_ALERTS = {
   GATED_ACCESS_REQUIRED_TITLE: 'Additional action required',
   GATED_ACCESS_REQUIRED_BODY:
     'Some models in this source are gated. To enable them for the model catalog, request access to them on Hugging Face. It can take 24 hours for access updates to sync to OpenShift AI.',
+    'A few included models are gated on Hugging Face and require permission to use. Request access on Hugging Face to use these models.',
+  SOURCE_DISABLED_TITLE: 'Source not enabled',
+  SOURCE_DISABLED_BODY:
+    'Models from this source will not appear in the model catalog until the source is enabled.',
 } as const;
 
 export const ERROR_MESSAGES = {
