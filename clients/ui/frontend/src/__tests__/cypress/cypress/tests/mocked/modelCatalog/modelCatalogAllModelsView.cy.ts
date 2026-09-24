@@ -9,6 +9,10 @@ import type { CatalogSource } from '~/app/shared/types/catalogTypes';
 import { MODEL_CATALOG_API_VERSION } from '~/__tests__/cypress/cypress/support/commands/api';
 import { mockCatalogFilterOptionsList } from '~/__mocks__/mockCatalogFilterOptionsList';
 import { SourceLabel } from '~/app/shared/types/catalogTypes';
+import {
+  setupValidatedModelIntercepts,
+  interceptPerformanceArtifactsList,
+} from '~/__tests__/cypress/cypress/support/interceptHelpers/modelCatalog';
 
 type HandlersProps = {
   sources?: CatalogSource[];
@@ -265,10 +269,51 @@ describe('Model Catalog All Models View', () => {
       );
 
       modelCatalog.visit();
+      modelCatalog.findLoadingState().should('not.exist');
 
+      // Toggle bar should be hidden
       modelCatalog.findAllModelsToggle().should('not.exist');
       modelCatalog.findCategoryToggle('label-Empty Category').should('not.exist');
       modelCatalog.findCategoryToggle('label-Hugging Face').should('not.exist');
+
+      // Page should NOT show the empty categories state — models are still available
+      cy.findByTestId('empty-model-catalog-no-categories').should('not.exist');
+    });
+
+    it('should show category sort dropdown when single category with performance toggle on', () => {
+      const singleCategorySources = [
+        mockCatalogSource({
+          id: 'huggingface',
+          name: 'Hugging Face',
+          labels: ['Hugging Face'],
+        }),
+        mockCatalogSource({
+          id: 'empty-source',
+          name: 'Empty Source',
+          labels: ['Empty Category'],
+        }),
+      ];
+
+      setupValidatedModelIntercepts({ sources: singleCategorySources });
+      interceptPerformanceArtifactsList();
+
+      // Override Empty Category to return no models
+      cy.interceptApi(
+        `GET /api/:apiVersion/model_catalog/models`,
+        {
+          path: { apiVersion: MODEL_CATALOG_API_VERSION },
+          query: { sourceLabel: 'Empty Category' },
+        },
+        mockCatalogModelList({ items: [] }),
+      );
+
+      modelCatalog.visit();
+      modelCatalog.findLoadingState().should('not.exist');
+      modelCatalog.togglePerformanceView();
+      modelCatalog.findLoadingState().should('not.exist');
+
+      // In single-category gallery view, sort dropdown is in the category header
+      modelCatalog.findCategorySortDropdown().should('be.visible');
     });
   });
 });

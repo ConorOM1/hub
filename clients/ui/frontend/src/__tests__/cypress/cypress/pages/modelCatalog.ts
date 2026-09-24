@@ -487,9 +487,13 @@ class ModelCatalog {
   }
 
   selectAnySortOption(testId: string) {
-    cy.get(
-      '[data-testid="model-catalog-sort-dropdown"], [data-testid="model-catalog-category-sort-dropdown"]',
-    ).click();
+    cy.get('body').then(($body) => {
+      if ($body.find('[data-testid="model-catalog-sort-dropdown"]').length) {
+        this.findSortDropdown().click();
+      } else {
+        this.findCategorySortDropdown().click();
+      }
+    });
     cy.findByTestId(testId).click();
     return this;
   }

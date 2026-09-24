@@ -28,7 +28,6 @@ const ModelCatalogSourceLabelBlocks: React.FC = () => {
       emptyCategoryLabels={emptyCategoryLabels}
       className="pf-v6-u-pb-0"
       ariaLabel="Source label selection"
-      hideWhenSingleCategory
     />
   );
 };
